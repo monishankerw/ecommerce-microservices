@@ -21,7 +21,7 @@
         <spring-cloud.version>2023.0.2</spring-cloud.version>
     </properties>
 
-    <!-- Spring Cloud Version Management -->
+    <!-- Spring Cloud -->
     <dependencyManagement>
         <dependencies>
 
@@ -38,15 +38,16 @@
 
     <dependencies>
 
-        <!-- API Gateway -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-
+        <!-- Gateway -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+
+        <!-- Eureka Client -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
     </dependencies>
