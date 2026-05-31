@@ -1,7 +1,7 @@
 package com.ecommerce.user.entity;
 
+import com.ecommerce.common.enums.Role;
 import jakarta.persistence.*;
-
 import lombok.Data;
 
 @Entity
@@ -14,9 +14,11 @@ public class User {
             GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
 
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }

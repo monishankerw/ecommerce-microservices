@@ -3,7 +3,7 @@ package com.ecommerce.user.config;
 import com.ecommerce.user.security.
         JwtAuthenticationFilter;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.context.annotation.*;
 
@@ -33,10 +33,10 @@ import org.springframework.security.web.authentication.
         UsernamePasswordAuthenticationFilter;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
-    private JwtAuthenticationFilter jwtFilter;
+    private final JwtAuthenticationFilter jwtFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -45,8 +45,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager
-    authenticationManager(
+    public AuthenticationManager authenticationManager(
             AuthenticationConfiguration config)
 
             throws Exception {
@@ -55,8 +54,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain
-    securityFilterChain(
+    public SecurityFilterChain securityFilterChain(
             HttpSecurity http)
 
             throws Exception {
@@ -74,10 +72,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
                         .requestMatchers(
-                                "/auth/**"
-                        ).permitAll()
+                                "/auth/login",
+                                "/auth/register",
+                                "/auth/refresh"
+                        )
+
+                        .permitAll()
 
                         .anyRequest()
+
                         .authenticated()
                 )
 

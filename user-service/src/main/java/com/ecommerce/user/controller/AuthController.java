@@ -1,34 +1,68 @@
 package com.ecommerce.user.controller;
 
+import com.ecommerce.common.dto.
+        ApiResponseDto;
+
 import com.ecommerce.user.dto.*;
+
 import com.ecommerce.user.entity.User;
+
 import com.ecommerce.user.service.AuthService;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private AuthService service;
+    private final AuthService service;
 
     @PostMapping("/register")
-    public String register(
+    public ApiResponseDto<String> register(
             @RequestBody User user) {
 
-        return service.register(user);
+        return ApiResponseDto.<String>builder()
+
+                .success(true)
+
+                .message("Registration Successful")
+
+                .data(service.register(user))
+
+                .build();
     }
 
     @PostMapping("/login")
-    public AuthResponse login(
+    public ApiResponseDto<AuthResponse> login(
             @RequestBody AuthRequest request) {
 
-        String token =
-                service.login(request);
+        return ApiResponseDto.<AuthResponse>builder()
 
-        return new AuthResponse(token);
+                .success(true)
+
+                .message("Login Successful")
+
+                .data(service.login(request))
+
+                .build();
+    }
+
+    @PostMapping("/refresh")
+    public ApiResponseDto<AuthResponse> refreshToken(
+            @RequestBody
+            RefreshTokenRequest request) {
+
+        return ApiResponseDto.<AuthResponse>builder()
+
+                .success(true)
+
+                .message("Token Refreshed")
+
+                .data(service.refreshToken(request))
+
+                .build();
     }
 }

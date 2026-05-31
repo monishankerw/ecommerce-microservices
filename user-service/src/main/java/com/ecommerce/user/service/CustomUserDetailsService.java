@@ -41,7 +41,7 @@ public class CustomUserDetailsService
                 user.getPassword(),
                 List.of(
                         new SimpleGrantedAuthority(
-                                user.getRole()
+                                user.getRole().name()
                         )
                 )
         );

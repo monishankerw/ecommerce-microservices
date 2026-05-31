@@ -19,7 +19,7 @@ public class JwtService {
                     SECRET.getBytes()
             );
 
-    public String generateToken(
+    public String generateAccessToken(
             String username) {
 
         return Jwts.builder()
@@ -31,7 +31,31 @@ public class JwtService {
                 .setExpiration(
                         new Date(
                                 System.currentTimeMillis()
-                                        + 1000 * 60 * 60
+                                        + 1000 * 60 * 15
+                        )
+                )
+
+                .signWith(
+                        key,
+                        SignatureAlgorithm.HS256
+                )
+
+                .compact();
+    }
+
+    public String generateRefreshToken(
+            String username) {
+
+        return Jwts.builder()
+
+                .setSubject(username)
+
+                .setIssuedAt(new Date())
+
+                .setExpiration(
+                        new Date(
+                                System.currentTimeMillis()
+                                        + 1000L * 60 * 60 * 24 * 7
                         )
                 )
 
