@@ -1,7 +1,6 @@
 package com.ecommerce.user.controller;
 
-import com.ecommerce.common.dto.
-        ApiResponseDto;
+import com.ecommerce.common.dto.ApiResponseDto;
 
 import com.ecommerce.user.dto.*;
 
@@ -21,8 +20,7 @@ public class AuthController {
     private final AuthService service;
 
     @PostMapping("/register")
-    public ApiResponseDto<String> register(
-            @RequestBody User user) {
+    public ApiResponseDto<String> register(@RequestBody User user) {
 
         return ApiResponseDto.<String>builder()
 
@@ -36,8 +34,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ApiResponseDto<AuthResponse> login(
-            @RequestBody AuthRequest request) {
+    public ApiResponseDto<AuthResponse> login(@RequestBody AuthRequest request) {
 
         return ApiResponseDto.<AuthResponse>builder()
 
@@ -51,9 +48,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public ApiResponseDto<AuthResponse> refreshToken(
-            @RequestBody
-            RefreshTokenRequest request) {
+    public ApiResponseDto<AuthResponse> refreshToken(@RequestBody RefreshTokenRequest request) {
 
         return ApiResponseDto.<AuthResponse>builder()
 
